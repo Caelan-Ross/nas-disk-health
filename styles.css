@@ -1,0 +1,62 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  overflow: hidden;
+  background: transparent;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.stat {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.stat.passed  { background: rgba(72, 187, 120, 0.15); border: 1px solid rgba(72, 187, 120, 0.3); }
+.stat.unknown { background: rgba(236, 201, 75, 0.15);  border: 1px solid rgba(236, 201, 75, 0.3); }
+.stat.failed  { background: rgba(252, 129, 74, 0.15);  border: 1px solid rgba(252, 129, 74, 0.3); }
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat.passed  .stat-value { color: #68d391; }
+.stat.unknown .stat-value { color: #f6e05e; }
+.stat.failed  .stat-value { color: #fc8181; }
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stat.passed  .stat-label { color: rgba(104, 211, 145, 0.7); }
+.stat.unknown .stat-label { color: rgba(246, 224, 94, 0.7); }
+.stat.failed  .stat-label { color: rgba(252, 129, 129, 0.7); }
+
+.error-msg {
+  font-size: 11px;
+  color: #718096;
+  text-align: center;
+  width: 100%;
+  padding: 4px 8px;
+}

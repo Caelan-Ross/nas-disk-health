@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NAS Disk Health</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body >
+  <div class="stats" id="stats">
+    <div class="stat passed">
+      <div class="stat-value" id="val-passed">0</div>
+      <div class="stat-label">Passed</div>
+    </div>
+    <div class="stat unknown">
+      <div class="stat-value" id="val-unknown">0</div>
+      <div class="stat-label">Unknown</div>
+    </div>
+    <div class="stat failed">
+      <div class="stat-value" id="val-failed">0</div>
+      <div class="stat-label">Failed</div>
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg" style="display:none;"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
