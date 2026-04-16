@@ -5,11 +5,11 @@ async function fetchHealth() {
   const elError   = document.getElementById('errorMsg');
 
   try {
-    const res = await fetch('/api/summary', {
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const res = await fetchWithRetry(
+      '/api/summary',
+      { headers: { 'Accept': 'application/json' } },
+      { retries: 3, delay: 500, backoff: 2 }
+    );
 
     const data = await res.json();
     const devices = Object.values(data?.data?.summary ?? {});
@@ -43,7 +43,26 @@ async function fetchHealth() {
   }
 }
 
+async function fetchWithRetry(url, options = {}, { retries = 3, delay = 500, backoff = 2 } = {}) {
+  let attempt = 0;
+  let currentDelay = delay;
+
+  while (attempt < retries) {
+    try {
+      const res = await fetch(url, options);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res;
+    } catch (err) {
+      attempt++;
+      if (attempt >= retries) throw err;
+      await new Promise(r => setTimeout(r, currentDelay));
+      currentDelay *= backoff;
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetchHealth();
   setInterval(fetchHealth, 60000);
 });
+
